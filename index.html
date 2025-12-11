@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>novaCode | Software, IA & Innovación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #002B5B; /* Navy */
+            --accent-color: #00A8E8;  /* Cian Electrico */
+            --dark-accent: #001F3F;
+            --text-dark: #1A1A1A;
+            --white: #FFFFFF;
+            --gray-bg: #F8FAFC;
+            --gradient-blue: linear-gradient(135deg, #002B5B 0%, #001021 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-img { height: 50px; width: auto; }
+
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { font-weight: 600; color: var(--primary-color); font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        .btn-cta {
+            padding: 0.8rem 1.8rem;
+            background: var(--accent-color);
+            color: var(--white);
+            border-radius: 50px; /* Bordes más modernos */
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 168, 232, 0.3); /* Glow effect */
+        }
+        .btn-cta:hover {
+            background: #008dc4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 168, 232, 0.5);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 120px 5% 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Tech Background Effect */
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 80%, rgba(0, 168, 232, 0.15) 0%, transparent 40%),
+                              radial-gradient(circle at 80% 20%, rgba(0, 168, 232, 0.1) 0%, transparent 40%);
+            z-index: 0;
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #00A8E8, #00E8D6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            color: #E0E6ED;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-badges {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            opacity: 0.7;
+        }
+        .tech-badges i { font-size: 1.5rem; margin: 0 10px; }
+
+        /* --- SERVICES (GRID) --- */
+        .section-padding { padding: 6rem 10%; }
+        .section-title { text-align: center; margin-bottom: 4rem; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent-color);
+            transition: 0.3s;
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0, 168, 232, 0.15); }
+        .card:hover::before { width: 100%; opacity: 0.05; }
+
+        .card i {
+            font-size: 2.5rem;
+            background: -webkit-linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- ABOUT SPLIT --- */
+        .about-section { display: flex; flex-wrap: wrap; background: var(--gray-bg); }
+        .about-text { flex: 1; padding: 6rem 5%; min-width: 400px; }
+        .about-image {
+            flex: 1;
+            /* Imagen más "tech" para el background */
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            min-height: 500px;
+        }
+
+        /* --- PROJECTS --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 320px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .project-card:hover img { transform: scale(1.05); }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(to top, #001f3f 0%, rgba(0,31,63,0.8) 80%, transparent 100%);
+            padding: 2rem;
+            color: white;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+        }
+        .project-card:hover .project-overlay { transform: translateY(0); opacity: 1; }
+
+        /* --- CONTACT --- */
+        .contact-section { background: var(--dark-accent); color: var(--white); }
+        .contact-section h2 { color: var(--white); }
+        
+        .contact-container { display: flex; flex-wrap: wrap; gap: 4rem; justify-content: center; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 1rem; margin-bottom: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white; border-radius: 5px;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none; border-color: var(--accent-color);
+        }
+        .contact-form button {
+            width: 100%; padding: 1rem; background: var(--accent-color);
+            color: white; border: none; font-weight: 700; border-radius: 5px; cursor: pointer;
+        }
+
+        footer { background: #000b14; color: #5a6e85; padding: 2rem; text-align: center; border-top: 1px solid #1a2a3a; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="novacode.jpg" alt="novaCode Logo" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#soluciones">Soluciones</a></li>
+            <li><a href="#vision">Visión</a></li>
+            <li><a href="#proyectos">Portafolio</a></li>
+            <li><a href="#contacto" class="btn-cta">Iniciar Proyecto</a></li>
+        </ul>
+    </nav>
+
+    <header id="inicio" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Transformamos Ideas en <br><span>Tecnología Exponencial</span></h1>
+            
+            <p>
+                Expertos en Ingeniería de Software a Medida, Ecosistemas Web de Alto Rendimiento 
+                y Soluciones Potenciadas por Inteligencia Artificial.
+            </p>
+            
+            <div style="margin-bottom: 2rem;">
+                <a href="#contacto" class="btn-cta">Construyamos el Futuro</a>
+            </div>
+
+            <div class="tech-badges">
+                <i class="fab fa-python" title="Python/AI"></i>
+                <i class="fas fa-brain" title="Machine Learning"></i>
+                <i class="fab fa-react" title="React"></i>
+                <i class="fab fa-node-js" title="Node.js"></i>
+                <i class="fas fa-cloud" title="Cloud Computing"></i>
+            </div>
+        </div>
+    </header>
+
+    <section id="soluciones" class="section-padding">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Nuestra Tecnología</h2>
+            <p>No solo programamos; diseñamos estrategias digitales escalables[cite: 10].</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-code"></i>
+                <h3>Software a Medida</h3>
+                <p>Desarrollo de arquitecturas robustas backend y frontend personalizadas para resolver problemas complejos de tu negocio.</p>
+            </div>
+            
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-bolt"></i>
+                <h3>Web de Alto Rendimiento</h3>
+                <p>Sitios ultra rápidos optimizados para SEO y conversión. Garantizamos velocidad de carga y estabilidad bajo alta demanda.</p>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-mobile-screen"></i>
+                <h3>Apps Nativas & Híbridas</h3>
+                <p>Experiencias móviles fluidas para iOS y Android que conectan y fidelizan a tus usuarios desde cualquier lugar.</p>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="400" style="border-top: 4px solid #00E8D6;">
+                <i class="fas fa-robot"></i> <h3>Integración IA & Chatbots</h3>
+                <p>Automatización inteligente con modelos GPT y Chatbots conversacionales que optimizan tu atención al cliente 24/7.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="about-section">
+        <div class="about-image"></div>
+        <div class="about-text" data-aos="fade-left">
+            <div class="section-title" style="text-align: left;">
+                <h2>ADN Innovador</h2>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Misión</h4>
+                <p>Transformar ideas ambiciosas en soluciones digitales de alto impacto, garantizando resultados medibles[cite: 3, 4].</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--accent-color); margin-bottom: 0.5rem;">Visión</h4>
+                <p>Ser el socio tecnológico líder en Latam, estableciendo el estándar en la convergencia de tecnología web, móvil e inteligencia artificial[cite: 6].</p>
+            </div>
+            
+            <a href="#proyectos" style="border-bottom: 2px solid var(--accent-color); font-weight: 700;">Ver casos de éxito <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <section id="proyectos" class="section-padding">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Proyectos que Transforman</h2>
+            <p>Innovación aplicada a resultados reales.</p>
+        </div>
+
+        <div class="project-grid">
+            <div class="project-card" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Dashboard AI">
+                <div class="project-overlay">
+                    <h3>SaaS con IA</h3>
+                    <p>Plataforma de análisis predictivo para retail.</p>
+                </div>
+            </div>
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="App Fintech">
+                <div class="project-overlay">
+                    <h3>App Fintech Segura</h3>
+                    <p>Billetera digital con biometría integrada.</p>
+                </div>
+            </div>
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Chatbot Integration">
+                <div class="project-overlay">
+                    <h3>Chatbot Corporativo</h3>
+                    <p>Asistente virtual de soporte técnico automatizado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="section-padding contact-section">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Hablemos de tu próximo gran salto</h2>
+            <p style="opacity: 0.8;">Cuéntanos tu proyecto y veamos cómo la tecnología lo eleva al siguiente nivel[cite: 12].</p>
+        </div>
+
+        <div class="contact-container">
+            <form class="contact-form" style="width: 100%; max-width: 600px;" data-aos="fade-up">
+                <div style="display: flex; gap: 1rem;">
+                    <input type="text" placeholder="Nombre" required>
+                    <input type="text" placeholder="Empresa">
+                </div>
+                <input type="email" placeholder="Correo corporativo" required>
+                <select style="width: 100%; padding: 1rem; margin-bottom: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #aaa; border-radius: 5px;">
+                    <option>¿Qué servicio te interesa?</option>
+                    <option>Desarrollo a Medida</option>
+                    <option>Integración de IA / Chatbots</option>
+                    <option>Aplicación Móvil</option>
+                </select>
+                <textarea rows="4" placeholder="Detalles del proyecto..." required></textarea>
+                <button type="submit">Solicitar Cotización</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 novaCode. Innovation Lab.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+    </script>
+</body>
+</html>
